@@ -274,6 +274,9 @@ export function GlobalKPICards() {
             </div>
           </div>
         </div>
+        <p className="mt-3 pt-2 border-t border-gray-300 text-[11px] italic text-gray-600">
+          <span className="font-semibold not-italic text-gray-700">NOTE:</span> All the data in the dashboard is demo data. No real-world data is related to this.
+        </p>
       </div>
     </div>
   )
