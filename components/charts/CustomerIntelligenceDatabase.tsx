@@ -13,8 +13,8 @@ type Col = { key: string; label: string; group: string }
 const BASIC_COLUMNS: Col[] = [
   { key: 'name', label: 'Customer Name / Company Name', group: 'Customer Information' },
   { key: 'overview', label: 'Business Overview', group: 'Customer Information' },
-  { key: 'ownerType', label: 'Fleet Owner Type', group: 'Customer Information' },
-  { key: 'fleetType', label: 'Vehicle Fleet Type', group: 'Customer Information' },
+  { key: 'ownerType', label: 'Fleet Owner Type (Logistics / Transport / Bus Operators / Taxi & Ride-Hailing / Leasing / Rental / Corporate Fleets / Government Fleets / Utilities / Construction / Mining / Agriculture)', group: 'Customer Information' },
+  { key: 'fleetType', label: 'Vehicle Fleet Type (Passenger Vehicles / LCVs / HCVs / Buses / Two-Wheelers / Mixed Fleet)', group: 'Customer Information' },
   { key: 'revenue', label: 'Total Annual Revenue (US$ Million)', group: 'Customer Information' },
   { key: 'fleetSize', label: 'Fleet Size / Scale', group: 'Customer Information' },
   { key: 'contactPerson', label: 'Key Contact Person', group: 'Contact Details' },
@@ -30,16 +30,20 @@ const ADVANCE_EXTRA: Col[] = [
   { key: 'painPoints', label: 'Core Fleet Disposal Pain Points', group: 'Fleet Vehicle Scrapping Drivers' },
   { key: 'renewalCycle', label: 'Fleet Renewal Cycle', group: 'Fleet Vehicle Scrapping Drivers' },
   { key: 'elvVolume', label: 'End-of-Life Vehicle Volume Potential', group: 'Fleet Vehicle Scrapping Drivers' },
-  { key: 'triggers', label: 'Key Disposal Triggers', group: 'Fleet Vehicle Scrapping Drivers' },
-  { key: 'budgetOwner', label: 'Budget Ownership', group: 'Purchasing Behaviour Metrics' },
-  { key: 'procurement', label: 'Procurement Model', group: 'Purchasing Behaviour Metrics' },
+  { key: 'triggers', label: 'Key Disposal Triggers (Aging Fleet / High Maintenance Cost / Accident Damage / Emission Compliance / Fleet Modernization / Lease Expiry / Asset Write-Off)', group: 'Fleet Vehicle Scrapping Drivers' },
+  { key: 'budgetOwner', label: 'Budget Ownership (Fleet Management / Procurement / Finance / Operations / Asset Recovery Team)', group: 'Purchasing Behaviour Metrics' },
+  { key: 'procurement', label: 'Procurement Model (Direct Recycler Tie-Up / Auction / Dealer / OEM Buyback / Tender-Based / Scrap Partner Contract)', group: 'Purchasing Behaviour Metrics' },
+  { key: 'vendorCriteria', label: 'Vendor Selection Criteria (Recovery Value / Compliance / Pickup Capability / Geographic Reach / Processing Speed / Documentation / Environmental Standards)', group: 'Purchasing Behaviour Metrics' },
+  { key: 'engagementType', label: 'Preferred Engagement Type (One-Time Disposal / Annual Contract / Multi-Year Scrap Partnership / Tender-Based)', group: 'Purchasing Behaviour Metrics' },
 ]
 
 const PREMIUM_EXTRA: Col[] = [
-  { key: 'decisionCycle', label: 'Decision-Making Cycle', group: 'Strategic Insights' },
-  { key: 'sustainability', label: 'Sustainability / ESG Commitments', group: 'Strategic Insights' },
-  { key: 'partnerships', label: 'Existing Recycler / OEM Partnerships', group: 'Strategic Insights' },
-  { key: 'opportunity', label: 'Engagement Opportunity Score', group: 'Strategic Insights' },
+  { key: 'solutionType', label: 'Preferred Solution Type (Vehicle Dismantling / Metal Recovery / Parts Recovery / Bulk Fleet Disposal / End-of-Life Asset Liquidation)', group: 'Solution Requirements' },
+  { key: 'serviceModel', label: 'Preferred Service Model (Onsite Pickup / Yard Delivery / Regional Collection / Hybrid)', group: 'Solution Requirements' },
+  { key: 'performance', label: 'Performance Expectations (Higher Recovery Value / Faster Disposal / Compliance Assurance / Lower Downtime / Better Fleet Turnover)', group: 'Solution Requirements' },
+  { key: 'benchmarking', label: 'Customer Benchmarking Summary (Potential Customers)', group: 'CMI Insights' },
+  { key: 'cmiNotes1', label: 'Additional Comments / Notes by CMI Team', group: 'CMI Insights' },
+  { key: 'cmiNotes2', label: 'Additional Comments / Notes by CMI Team', group: 'CMI Insights' },
 ]
 
 const ADVANCE_COLUMNS: Col[] = [...BASIC_COLUMNS, ...ADVANCE_EXTRA]
@@ -66,10 +70,14 @@ const CUSTOMERS = [
     triggers: 'Aging Fleet, High Maintenance Cost',
     budgetOwner: 'Fleet Management',
     procurement: 'Direct Recycler Tie-Up',
-    decisionCycle: '3–4 months',
-    sustainability: 'Net-zero by 2040, ISO 14001',
-    partnerships: 'Gerdau, Sucatas Sao Paulo',
-    opportunity: 'High (92)',
+    vendorCriteria: 'Recovery Value, Compliance',
+    engagementType: 'Multi-Year Scrap Partnership',
+    solutionType: 'Bulk Fleet Disposal',
+    serviceModel: 'Onsite Pickup',
+    performance: 'Higher Recovery Value',
+    benchmarking: 'Tier-1 anchor customer',
+    cmiNotes1: 'Strong fit for long-term recycler tie-up',
+    cmiNotes2: 'ESG-aligned, prefers documented partners',
   },
   {
     name: 'Localiza Rent a Car S.A.',
@@ -91,10 +99,14 @@ const CUSTOMERS = [
     triggers: 'Lease Expiry, Fleet Modernization',
     budgetOwner: 'Asset Recovery Team',
     procurement: 'Auction',
-    decisionCycle: '1–2 months',
-    sustainability: 'CDP-A list, EV transition pilots',
-    partnerships: 'Volkswagen, Fiat, Renault buyback',
-    opportunity: 'Very High (97)',
+    vendorCriteria: 'Recovery Value, Processing Speed',
+    engagementType: 'Annual Contract',
+    solutionType: 'End-of-Life Asset Liquidation',
+    serviceModel: 'Regional Collection',
+    performance: 'Faster Disposal',
+    benchmarking: 'High-volume strategic account',
+    cmiNotes1: 'Open to EV transition pilots',
+    cmiNotes2: 'Decision via central asset desk',
   },
   {
     name: 'Movida Participações',
@@ -115,11 +127,15 @@ const CUSTOMERS = [
     elvVolume: '~6,800 units/yr',
     triggers: 'Lease Expiry, Accident Damage',
     budgetOwner: 'Procurement',
-    procurement: 'Dealer + Auction',
-    decisionCycle: '2 months',
-    sustainability: 'Scope 3 reporting underway',
-    partnerships: 'GM Brazil, Sinctronics',
-    opportunity: 'High (88)',
+    procurement: 'Dealer',
+    vendorCriteria: 'Documentation, Compliance',
+    engagementType: 'Annual Contract',
+    solutionType: 'Parts Recovery',
+    serviceModel: 'Yard Delivery',
+    performance: 'Compliance Assurance',
+    benchmarking: 'Top-3 rental disposal flow',
+    cmiNotes1: 'Scope 3 reporting in progress',
+    cmiNotes2: 'Procurement-led decisions',
   },
   {
     name: 'Viação 1001 (Grupo JCA)',
@@ -141,10 +157,14 @@ const CUSTOMERS = [
     triggers: 'Emission Compliance, Aging Fleet',
     budgetOwner: 'Operations',
     procurement: 'Tender-Based',
-    decisionCycle: '4–6 months',
-    sustainability: 'Euro 6 transition by 2027',
-    partnerships: 'Marcopolo, Mercedes-Benz',
-    opportunity: 'Medium (74)',
+    vendorCriteria: 'Compliance, Environmental Standards',
+    engagementType: 'Tender-Based',
+    solutionType: 'Vehicle Dismantling',
+    serviceModel: 'Yard Delivery',
+    performance: 'Compliance Assurance',
+    benchmarking: 'Regional bus operator benchmark',
+    cmiNotes1: 'Euro 6 transition driving demand',
+    cmiNotes2: 'Tender cycle is long',
   },
   {
     name: '99 Tecnologia (DiDi Brasil)',
@@ -166,10 +186,14 @@ const CUSTOMERS = [
     triggers: 'Aging Fleet, Lease Expiry',
     budgetOwner: 'Finance',
     procurement: 'OEM Buyback',
-    decisionCycle: '2 months',
-    sustainability: 'EV pilot in São Paulo',
-    partnerships: 'BYD, Caoa Chery',
-    opportunity: 'High (85)',
+    vendorCriteria: 'Recovery Value, Geographic Reach',
+    engagementType: 'Annual Contract',
+    solutionType: 'End-of-Life Asset Liquidation',
+    serviceModel: 'Hybrid',
+    performance: 'Better Fleet Turnover',
+    benchmarking: 'Mobility platform benchmark',
+    cmiNotes1: 'EV pilot in São Paulo',
+    cmiNotes2: 'Finance-led approval',
   },
   {
     name: 'Vale S.A.',
@@ -191,10 +215,14 @@ const CUSTOMERS = [
     triggers: 'High Maintenance Cost, Asset Write-Off',
     budgetOwner: 'Asset Recovery Team',
     procurement: 'Tender-Based',
-    decisionCycle: '6 months',
-    sustainability: 'Net-zero 2050, dam-safety ESG',
-    partnerships: 'Caterpillar, Komatsu reman',
-    opportunity: 'Very High (95)',
+    vendorCriteria: 'Environmental Standards, Pickup Capability',
+    engagementType: 'Multi-Year Scrap Partnership',
+    solutionType: 'Metal Recovery',
+    serviceModel: 'Onsite Pickup',
+    performance: 'Compliance Assurance',
+    benchmarking: 'Strategic mining anchor',
+    cmiNotes1: 'Net-zero 2050 commitment',
+    cmiNotes2: 'Requires hazmat-certified vendors',
   },
   {
     name: 'Petrobras Distribuidora (Vibra)',
@@ -216,10 +244,14 @@ const CUSTOMERS = [
     triggers: 'Emission Compliance, Aging Fleet',
     budgetOwner: 'Operations',
     procurement: 'Direct Recycler Tie-Up',
-    decisionCycle: '3 months',
-    sustainability: 'GHG reduction target -30% by 2030',
-    partnerships: 'Scania, Volvo',
-    opportunity: 'High (89)',
+    vendorCriteria: 'Compliance, Documentation',
+    engagementType: 'Multi-Year Scrap Partnership',
+    solutionType: 'Vehicle Dismantling',
+    serviceModel: 'Onsite Pickup',
+    performance: 'Lower Downtime',
+    benchmarking: 'Energy logistics benchmark',
+    cmiNotes1: 'GHG -30% by 2030 target',
+    cmiNotes2: 'Tanker decon adds complexity',
   },
   {
     name: 'Construtora Andrade Gutierrez',
@@ -241,14 +273,18 @@ const CUSTOMERS = [
     triggers: 'Asset Write-Off, High Maintenance Cost',
     budgetOwner: 'Procurement',
     procurement: 'Auction',
-    decisionCycle: '4 months',
-    sustainability: 'ISO 14001, ESG governance launch',
-    partnerships: 'Volvo CE, Sotreq',
-    opportunity: 'Medium (78)',
+    vendorCriteria: 'Pickup Capability, Geographic Reach',
+    engagementType: 'One-Time Disposal',
+    solutionType: 'Metal Recovery',
+    serviceModel: 'Onsite Pickup',
+    performance: 'Higher Recovery Value',
+    benchmarking: 'Construction sector reference',
+    cmiNotes1: 'ISO 14001 governance launch',
+    cmiNotes2: 'Project-driven disposal flow',
   },
   {
     name: 'JBS S.A.',
-    overview: 'World\'s largest meat processor with cold-chain logistics fleet',
+    overview: "World's largest meat processor with cold-chain logistics fleet",
     ownerType: 'Logistics',
     fleetType: 'HCVs (Reefer) + LCVs',
     revenue: '72,500',
@@ -266,10 +302,14 @@ const CUSTOMERS = [
     triggers: 'Emission Compliance, Aging Fleet',
     budgetOwner: 'Fleet Management',
     procurement: 'Scrap Partner Contract',
-    decisionCycle: '2 months',
-    sustainability: 'Net-zero 2040 commitment',
-    partnerships: 'Iveco, Thermo King',
-    opportunity: 'High (90)',
+    vendorCriteria: 'Environmental Standards, Compliance',
+    engagementType: 'Multi-Year Scrap Partnership',
+    solutionType: 'Parts Recovery',
+    serviceModel: 'Hybrid',
+    performance: 'Compliance Assurance',
+    benchmarking: 'Cold-chain anchor',
+    cmiNotes1: 'Net-zero 2040 commitment',
+    cmiNotes2: 'F-gas handling required',
   },
   {
     name: 'Cooxupé Cooperativa',
@@ -291,10 +331,14 @@ const CUSTOMERS = [
     triggers: 'Aging Fleet, High Maintenance Cost',
     budgetOwner: 'Operations',
     procurement: 'Dealer',
-    decisionCycle: '5 months',
-    sustainability: 'Rainforest Alliance certified',
-    partnerships: 'New Holland, John Deere',
-    opportunity: 'Medium (72)',
+    vendorCriteria: 'Geographic Reach, Pickup Capability',
+    engagementType: 'One-Time Disposal',
+    solutionType: 'Metal Recovery',
+    serviceModel: 'Regional Collection',
+    performance: 'Faster Disposal',
+    benchmarking: 'Agri co-op reference',
+    cmiNotes1: 'Rainforest Alliance certified',
+    cmiNotes2: 'Rural pickup is bottleneck',
   },
   {
     name: 'Correios (ECT)',
@@ -316,10 +360,14 @@ const CUSTOMERS = [
     triggers: 'Aging Fleet, Asset Write-Off',
     budgetOwner: 'Procurement',
     procurement: 'Tender-Based',
-    decisionCycle: '6–9 months',
-    sustainability: 'Federal sustainable logistics plan',
-    partnerships: 'Honda, Fiat',
-    opportunity: 'High (86)',
+    vendorCriteria: 'Documentation, Compliance',
+    engagementType: 'Tender-Based',
+    solutionType: 'Bulk Fleet Disposal',
+    serviceModel: 'Yard Delivery',
+    performance: 'Compliance Assurance',
+    benchmarking: 'Government fleet benchmark',
+    cmiNotes1: 'Federal sustainable logistics plan',
+    cmiNotes2: 'Long tender approval cycle',
   },
   {
     name: 'Sompo Seguros Brasil',
@@ -341,10 +389,14 @@ const CUSTOMERS = [
     triggers: 'Accident Damage',
     budgetOwner: 'Asset Recovery Team',
     procurement: 'Auction',
-    decisionCycle: '<1 month',
-    sustainability: 'Circular economy partnership',
-    partnerships: 'Copart Brasil, Sinctronics',
-    opportunity: 'Very High (94)',
+    vendorCriteria: 'Processing Speed, Recovery Value',
+    engagementType: 'Annual Contract',
+    solutionType: 'Parts Recovery',
+    serviceModel: 'Regional Collection',
+    performance: 'Faster Disposal',
+    benchmarking: 'Insurance salvage benchmark',
+    cmiNotes1: 'Circular economy partnership',
+    cmiNotes2: 'Continuous flow, fast turn',
   },
 ]
 
@@ -400,7 +452,7 @@ const PROPOSITIONS: PropositionConfig[] = [
   {
     id: 'p3',
     title: 'Proposition 3 — Premium',
-    subtitle: 'Full strategic intelligence with ESG, partnerships and engagement scoring',
+    subtitle: 'Adds solution requirements and CMI insights',
     badge: 'PREMIUM',
     badgeClass: 'bg-amber-100 text-amber-800 ring-1 ring-amber-300',
     headerGradient: 'from-amber-50 via-orange-50 to-rose-50',
@@ -413,7 +465,8 @@ const PROPOSITIONS: PropositionConfig[] = [
       'Contact Details': 'bg-blue-50',
       'Fleet Vehicle Scrapping Drivers': 'bg-purple-50',
       'Purchasing Behaviour Metrics': 'bg-fuchsia-50',
-      'Strategic Insights': 'bg-amber-50',
+      'Solution Requirements': 'bg-amber-50',
+      'CMI Insights': 'bg-rose-50',
     },
   },
 ]
@@ -493,9 +546,10 @@ export default function CustomerIntelligenceDatabase({
                       {prop.columns.map(c => (
                         <th
                           key={c.key}
-                          className={`px-3 py-2 text-left font-semibold text-gray-800 border border-gray-300 whitespace-nowrap ${prop.groupColors[c.group] || 'bg-gray-50'}`}
+                          className={`px-3 py-2 text-left font-semibold text-gray-800 border border-gray-300 align-top ${prop.groupColors[c.group] || 'bg-gray-50'}`}
+                          style={{ minWidth: '180px', maxWidth: '260px' }}
                         >
-                          {c.label}
+                          <div className="whitespace-normal leading-snug">{c.label}</div>
                         </th>
                       ))}
                     </tr>
@@ -511,20 +565,13 @@ export default function CustomerIntelligenceDatabase({
                         </td>
                         {prop.columns.map(c => {
                           const val = (cust as Record<string, string>)[c.key] ?? '—'
-                          const isOpp = c.key === 'opportunity'
-                          let oppClass = ''
-                          if (isOpp) {
-                            if (val.startsWith('Very High')) oppClass = 'bg-emerald-100 text-emerald-800 font-semibold'
-                            else if (val.startsWith('High')) oppClass = 'bg-green-100 text-green-800 font-semibold'
-                            else if (val.startsWith('Medium')) oppClass = 'bg-yellow-100 text-yellow-800 font-semibold'
-                            else oppClass = 'bg-gray-100 text-gray-800'
-                          }
                           return (
                             <td
                               key={c.key}
-                              className={`px-3 py-2 border border-gray-200 text-gray-700 whitespace-nowrap ${isOpp ? oppClass : ''}`}
+                              className="px-3 py-2 border border-gray-200 text-gray-700 align-top"
+                              style={{ minWidth: '180px', maxWidth: '260px' }}
                             >
-                              {val}
+                              <div className="whitespace-normal leading-snug">{val}</div>
                             </td>
                           )
                         })}
